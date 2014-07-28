@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="OmsiTools.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Language" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Default</Value>
+    </Setting>
+    <Setting Name="OmsiPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RegKey32" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">HKEY_LOCAL_MACHINE\SOFTWARE\aerosoft\OMSI 2</Value>
+    </Setting>
+    <Setting Name="RegKey64" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\aerosoft\OMSI 2</Value>
+    </Setting>
+    <Setting Name="RegValueName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Product_Path</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
