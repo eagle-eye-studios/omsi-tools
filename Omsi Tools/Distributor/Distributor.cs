@@ -1,7 +1,35 @@
-﻿using System;
+﻿/*  This file is part of the "OMSI Tools" project. 
+ * 
+ *  Authors: Florian Vick <florian@eagle-eye-studios.net> 
+ *  Find the project at https://github.com/vickfl/omsi-tools/
+ *
+ *  OMSI Tools is licensed under the MIT License:
+ * 
+ *	Copyright (c) 2014 Eagle Eye Studios, Florian Vick
+ *
+ *	Permission is hereby granted, free of charge, to any person obtaining a copy
+ *	of this software and associated documentation files (the "Software"), to deal
+ *	in the Software without restriction, including without limitation the rights
+ *	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *	copies of the Software, and to permit persons to whom the Software is
+ *	furnished to do so, subject to the following conditions:
+ *
+ *	The above copyright notice and this permission notice shall be included in
+ *	all copies or substantial portions of the Software.
+ *
+ *	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ *	THE SOFTWARE.
+ */
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Media;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,15 +42,15 @@ namespace OmsiTools.Distributor
         public Distributor()
         {
             this.InitializeComponent();
+            userBusFiles = new List<BusEntry>();
         }
 
         /// <summary>
         /// Walks the OMSI 2 Vehicles directory and collects Name and Path of the first .bus file in each directory
         /// </summary>
         /// <returns>List containing Name and Path of the first .bus file of each directory</returns>
-        public List<BusEntry> WalkDirectories()
+        public void WalkDirectories()
         {
-            var res = new List<BusEntry>();
             var dInfo = new DirectoryInfo(Path.Combine(Properties.Settings.Default.OmsiPath, "Vehicles")); //Root path for dir walking.
             Parallel.ForEach<DirectoryInfo>(dInfo.GetDirectories(), dir =>
             {
@@ -35,14 +63,12 @@ namespace OmsiTools.Distributor
                         if (lines[i].StartsWith("[friendlyname]")) // Check if line starts with the [friendlyname] tag; indented ones will be ignored.
                         {
                             var name = string.Format("{0} {1}", lines[i + 1], lines[i + 2]); // assemble name from the next two lines below the tag
-                            res.Add(new BusEntry() { Name = name, Path = busFile.DirectoryName });
+                            userBusFiles.Add(new BusEntry() { Name = name, Path = busFile.DirectoryName });
                             return; //Only test until the first bus file is found. No need to continue as HOF files are used per directory.
                         }
                     }
                 }
             });
-
-            return res;
         }
 
         /// <summary>
@@ -52,14 +78,13 @@ namespace OmsiTools.Distributor
         {
             var dlg = new InfoDlg(); //Display InfoDialog that the program is walking the Vehicles directory
             dlg.Show(this);
-            var task = Task.Factory.StartNew<List<BusEntry>>(WalkDirectories); //Begin walking on a seperate Thread to prevent GUI lockup
-            Application.DoEvents();
-            task.Wait(); // Wait until task has finished
-            this.userBusFiles = task.Result; // Retrieve .bus file list; one for each directory
+            var thread = new Thread(WalkDirectories); //Begin walking on a seperate Thread to prevent GUI lockup
+            thread.Start();
+            while (!thread.IsAlive)
+                Application.DoEvents(); //While thread is alive update GUI
+            thread.Join(); // Join thread back into the mothership
             this.listView.DataSource = this.userBusFiles; // Set the retrieved list as DataSource, ListView will update automatically.
-            dlg.Hide(); // As we do not need the InfoDlg anymore hide & destroy it
-            GC.Collect();
-            // If you ask why I dispose them manually: I do not fully trust the GC times :P
+            dlg.Hide(); // As we do not need the InfoDlg anymore hide it.
         }
 
         /// <summary>

@@ -70,5 +70,38 @@ namespace OmsiTools.Properties {
                 return ((string)(this["RegValueName"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BackupLocation {
+            get {
+                return ((string)(this["BackupLocation"]));
+            }
+            set {
+                this["BackupLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("archives")]
+        public string BackupDataDir {
+            get {
+                return ((string)(this["BackupDataDir"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("db")]
+        public string BackupInfoDir {
+            get {
+                return ((string)(this["BackupInfoDir"]));
+            }
+            set {
+                this["BackupInfoDir"] = value;
+            }
+        }
     }
 }

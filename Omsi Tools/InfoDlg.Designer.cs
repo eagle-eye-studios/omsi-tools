@@ -1,4 +1,4 @@
-﻿namespace OmsiTools.Distributor
+﻿namespace OmsiTools
 {
     partial class InfoDlg
     {
@@ -42,6 +42,8 @@
             this.radWaitingBar1.Size = new System.Drawing.Size(348, 24);
             this.radWaitingBar1.TabIndex = 0;
             this.radWaitingBar1.ThemeName = "VisualStudio2012Dark";
+            this.radWaitingBar1.WaitingSpeed = 100;
+            this.radWaitingBar1.WaitingStep = 8;
             this.radWaitingBar1.WaitingStyle = Telerik.WinControls.Enumerations.WaitingBarStyles.Throbber;
             // 
             // radLabel1
@@ -78,6 +80,7 @@
             this.Text = "Working...";
             this.ThemeName = "VisualStudio2012Dark";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.InfoDlg_Load);
             ((System.ComponentModel.ISupportInitialize)(this.radWaitingBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();

@@ -27,9 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutBox));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.radLabelProductName = new Telerik.WinControls.UI.RadLabel();
             this.radLabelVersion = new Telerik.WinControls.UI.RadLabel();
             this.radLabelCopyright = new Telerik.WinControls.UI.RadLabel();
@@ -37,7 +35,6 @@
             this.radTextBoxDescription = new Telerik.WinControls.UI.RadTextBox();
             this.okRadButton = new Telerik.WinControls.UI.RadButton();
             this.tableLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabelProductName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabelVersion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabelCopyright)).BeginInit();
@@ -50,16 +47,14 @@
             // tableLayoutPanel
             // 
             this.tableLayoutPanel.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel.ColumnCount = 2;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67F));
-            this.tableLayoutPanel.Controls.Add(this.logoPictureBox, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.radLabelProductName, 1, 0);
-            this.tableLayoutPanel.Controls.Add(this.radLabelVersion, 1, 1);
-            this.tableLayoutPanel.Controls.Add(this.radLabelCopyright, 1, 2);
-            this.tableLayoutPanel.Controls.Add(this.radLabelCompanyName, 1, 3);
-            this.tableLayoutPanel.Controls.Add(this.radTextBoxDescription, 1, 4);
-            this.tableLayoutPanel.Controls.Add(this.okRadButton, 1, 5);
+            this.tableLayoutPanel.ColumnCount = 1;
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 97.93814F));
+            this.tableLayoutPanel.Controls.Add(this.radLabelProductName, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.radLabelVersion, 0, 1);
+            this.tableLayoutPanel.Controls.Add(this.radLabelCopyright, 0, 2);
+            this.tableLayoutPanel.Controls.Add(this.radLabelCompanyName, 0, 3);
+            this.tableLayoutPanel.Controls.Add(this.radTextBoxDescription, 0, 4);
+            this.tableLayoutPanel.Controls.Add(this.okRadButton, 0, 5);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(9, 9);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
@@ -73,22 +68,10 @@
             this.tableLayoutPanel.Size = new System.Drawing.Size(388, 265);
             this.tableLayoutPanel.TabIndex = 0;
             // 
-            // logoPictureBox
-            // 
-            this.logoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logoPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("logoPictureBox.Image")));
-            this.logoPictureBox.Location = new System.Drawing.Point(3, 3);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 6);
-            this.logoPictureBox.Size = new System.Drawing.Size(122, 259);
-            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.logoPictureBox.TabIndex = 12;
-            this.logoPictureBox.TabStop = false;
-            // 
             // radLabelProductName
             // 
             this.radLabelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radLabelProductName.Location = new System.Drawing.Point(134, 0);
+            this.radLabelProductName.Location = new System.Drawing.Point(6, 0);
             this.radLabelProductName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.radLabelProductName.MaximumSize = new System.Drawing.Size(0, 17);
             this.radLabelProductName.Name = "radLabelProductName";
@@ -105,7 +88,7 @@
             // radLabelVersion
             // 
             this.radLabelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radLabelVersion.Location = new System.Drawing.Point(134, 26);
+            this.radLabelVersion.Location = new System.Drawing.Point(6, 26);
             this.radLabelVersion.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.radLabelVersion.MaximumSize = new System.Drawing.Size(0, 17);
             this.radLabelVersion.Name = "radLabelVersion";
@@ -122,7 +105,7 @@
             // radLabelCopyright
             // 
             this.radLabelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radLabelCopyright.Location = new System.Drawing.Point(134, 52);
+            this.radLabelCopyright.Location = new System.Drawing.Point(6, 52);
             this.radLabelCopyright.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.radLabelCopyright.MaximumSize = new System.Drawing.Size(0, 17);
             this.radLabelCopyright.Name = "radLabelCopyright";
@@ -139,7 +122,7 @@
             // radLabelCompanyName
             // 
             this.radLabelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radLabelCompanyName.Location = new System.Drawing.Point(134, 78);
+            this.radLabelCompanyName.Location = new System.Drawing.Point(6, 78);
             this.radLabelCompanyName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.radLabelCompanyName.MaximumSize = new System.Drawing.Size(0, 17);
             this.radLabelCompanyName.Name = "radLabelCompanyName";
@@ -157,16 +140,17 @@
             // 
             this.radTextBoxDescription.AutoSize = false;
             this.radTextBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radTextBoxDescription.Location = new System.Drawing.Point(134, 107);
+            this.radTextBoxDescription.Location = new System.Drawing.Point(6, 107);
             this.radTextBoxDescription.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
             this.radTextBoxDescription.Multiline = true;
             this.radTextBoxDescription.Name = "radTextBoxDescription";
             this.radTextBoxDescription.ReadOnly = true;
             this.radTextBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.radTextBoxDescription.Size = new System.Drawing.Size(251, 126);
+            this.radTextBoxDescription.Size = new System.Drawing.Size(379, 126);
             this.radTextBoxDescription.TabIndex = 23;
             this.radTextBoxDescription.TabStop = false;
             this.radTextBoxDescription.Text = "Description";
+            this.radTextBoxDescription.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.radTextBoxDescription.ThemeName = "VisualStudio2012Dark";
             // 
             // okRadButton
@@ -203,7 +187,6 @@
             this.ThemeName = "VisualStudio2012Dark";
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabelProductName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabelVersion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabelCopyright)).EndInit();
@@ -218,7 +201,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
-        private System.Windows.Forms.PictureBox logoPictureBox;
         private Telerik.WinControls.UI.RadLabel radLabelProductName;
         private Telerik.WinControls.UI.RadLabel radLabelVersion;
         private Telerik.WinControls.UI.RadLabel radLabelCopyright;

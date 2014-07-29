@@ -17,5 +17,14 @@
     <Setting Name="RegValueName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Product_Path</Value>
     </Setting>
+    <Setting Name="BackupLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BackupDataDir" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">archives</Value>
+    </Setting>
+    <Setting Name="BackupInfoDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">db</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

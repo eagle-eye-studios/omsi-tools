@@ -1,4 +1,5 @@
 ﻿/*  This file is part of the "OMSI Tools" project. 
+ * 
  *  Authors: Florian Vick <florian@eagle-eye-studios.net> 
  *  Find the project at https://github.com/vickfl/omsi-tools/
  *
@@ -25,21 +26,20 @@
  *	THE SOFTWARE.
  */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using Telerik.WinControls;
 
-namespace OmsiTools.Addons
+namespace OmsiTools
 {
-    public partial class AddonManager : Telerik.WinControls.UI.RadForm
+    public partial class InfoDlg : Telerik.WinControls.UI.RadForm
     {
-        public AddonManager()
+        public InfoDlg()
         {
             InitializeComponent();
+        }
+
+        private void InfoDlg_Load(object sender, EventArgs e)
+        {
+            radWaitingBar1.StartWaiting();
         }
     }
 }
