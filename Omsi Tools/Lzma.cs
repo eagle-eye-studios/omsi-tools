@@ -54,8 +54,8 @@ namespace OmsiTools
         /// </summary>
         /// <param name="files">The list of files to compress (full paths)</param>
         /// <param name="outputFile">The output archive file (full path)</param>
-        /// <param name="compressionHandler">Function to call when the compression state changes. Hint: update your progress bar here!</param>
-        /// <param name="fileCompressionStartedHandler">Function is called when a new file is starting to be compressed. Hint: Update your status text here!</param>
+        /// <param name="compressionHandler">Function to call when the compression state changes. (Hint: update your progress bar here!)</param>
+        /// <param name="fileCompressionStartedHandler">Function is called when a new file is starting to be compressed. (Hint: Update your status text here!)</param>
         /// <param name="compressionFinished">Function to call when everything is done.</param>
         public static void Compress(List<string> files, string outputFile, EventHandler<ProgressEventArgs> compressionHandler, EventHandler<FileNameEventArgs> fileCompressionStartedHandler, EventHandler<EventArgs> compressionFinished)
         {
@@ -95,19 +95,44 @@ namespace OmsiTools
         }
 
         /// <summary>
-        /// Extracts a 7zip archive to the specified output directory. UNFINISHED!
+        /// Extracts a 7zip archive to the specified output directory.
         /// </summary>
         /// <param name="inputFile">The archive to extract (full path, please!)</param>
         /// <param name="outputDir">The path to extract the archive to (also full path, please!)</param>
         public static void Extract(string inputFile, string outputDir)
         {
+            Extract(inputFile, outputDir, null, null, null, null);
+        }
+
+        /// <summary>
+        /// Extracts a 7zip archive to the specified output directory.
+        /// </summary>
+        /// <param name="inputFile">The archive to extract (full path, please!)</param>
+        /// <param name="outputDir">The path to extract the archive to (also full path, please!)</param>
+        /// <param name="extractingHandler">Function to call when the extraction state changes. (Hint: Update your progress bar here!)</param>
+        /// <param name="fileExistsHandler">Function to call when a file exists</param>
+        /// <param name="fileExtractionStartedHandler">Function is called when a new file is being extracted (Hint: Update your status text here!)</param>
+        /// <param name="finishedHandler">Function that is called when the extraction process is finished</param>
+        public static void Extract(string inputFile, string outputDir, EventHandler<ProgressEventArgs> extractingHandler, EventHandler<FileOverwriteEventArgs> fileExistsHandler, 
+            EventHandler<FileInfoEventArgs> fileExtractionStartedHandler, EventHandler<EventArgs> finishedHandler)
+        {
             if (Environment.Is64BitProcess)
                 SevenZip.SevenZipExtractor.SetLibraryPath(Path.GetFullPath("7z64.dll"));
             else
                 SevenZip.SevenZipExtractor.SetLibraryPath(Path.GetFullPath("7z.dll"));
+
             SevenZip.SevenZipExtractor e = new SevenZip.SevenZipExtractor(inputFile);
             e.PreserveDirectoryStructure = true;
-            e.ExtractArchive(outputDir);
+
+            if (extractingHandler != null)
+                e.Extracting += extractingHandler;
+            if (finishedHandler != null)
+                e.ExtractionFinished += finishedHandler;
+            if (fileExistsHandler != null)
+                e.FileExists += fileExistsHandler;
+            if (fileExtractionStartedHandler != null)
+                e.FileExtractionStarted += fileExtractionStartedHandler;
+            e.BeginExtractArchive(outputDir);
         }
     }
 }

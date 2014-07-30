@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>veröffentlichen\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -22,11 +23,14 @@
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <MapFileExtensions>false</MapFileExtensions>
+    <ProductName>OMSI Tools</ProductName>
+    <PublisherName>Eagle Eye Studios</PublisherName>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>0.9.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup>
@@ -43,7 +47,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -85,6 +90,18 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>AEF4B76A2DD736523201144DD10812175493F9DA</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Omsi Tools_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SevenZipSharp, Version=0.64.5323.21757, Culture=neutral, processorArchitecture=MSIL">
@@ -141,6 +158,12 @@
     <Compile Include="Backup\NewBackup.Designer.cs">
       <DependentUpon>NewBackup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Backup\RestoreDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backup\RestoreDlg.Designer.cs">
+      <DependentUpon>RestoreDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Distributor\BusEntry.cs" />
     <Compile Include="Distributor\Distributor.cs">
       <SubType>Form</SubType>
@@ -174,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Backup\NewBackup.resx">
       <DependentUpon>NewBackup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Backup\RestoreDlg.resx">
+      <DependentUpon>RestoreDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Distributor\Distributor.resx">
       <DependentUpon>Distributor.cs</DependentUpon>

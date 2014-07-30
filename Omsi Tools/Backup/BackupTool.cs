@@ -132,6 +132,8 @@ namespace OmsiTools.Backup
                 files = dir.GetFiles("*.*", SearchOption.TopDirectoryOnly);
             foreach (var file in files)
             {
+                if (file.FullName.EndsWith("Thumbs.db"))
+                    continue;
                 ret.Add(file.FullName);
             }
             return ret;
@@ -142,7 +144,33 @@ namespace OmsiTools.Backup
         /// </summary>
         private void RestoreBackup(object sender, EventArgs e)
         {
+            if (listView.SelectedItem == null)
+            {
+                MessageBox.Show("You need to select a backup first!", "No backup selected");
+                return;
+            }
+            var selection = listView.SelectedItem.DataBoundItem as BackupDisplay;
+            backups.ForEach(delegate(Backup backup)
+            { 
+                if (backup.Date == selection.Timestamp)
+                    currentBackup = backup;
+            });
+            var rsdlg = new RestoreDlg(currentBackup);
+            if (rsdlg.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                return;
 
+            DisableUi();
+            Thread worker = new Thread(currentBackup.Restore);
+            worker.Start();
+            lblStatus.Text = "Restoring backup...";
+            while (worker.IsAlive)
+            {
+                progressBar.Value1 = currentBackup.Progress; //Update the progress bar.
+                progressBar.Text = currentBackup.Progress + " %";
+                Application.DoEvents(); //Twiddle thumbs
+            }
+            lblStatus.Text = "Finished.";
+            EnableUi();
         }
 
         /// <summary>
@@ -198,7 +226,7 @@ namespace OmsiTools.Backup
                     backups.Add(b);
                     var bd = new BackupDisplay();
                     bd.Timestamp = b.Date;
-                    bd.Folder = b.Directory;
+                    bd.Folder = (String.IsNullOrEmpty(b.Directory)) ? "OMSI 2" : b.Directory;
                     bd.Size = String.Format("{0:0.00}", (b.Size / (1024 * 1024))) + " MB";
                     backupsForDisplay.Add(bd);
                 }

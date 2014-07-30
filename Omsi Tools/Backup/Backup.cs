@@ -109,9 +109,11 @@ namespace OmsiTools.Backup
         {
             var ret = new Backup();
             ret.Date = DateTime.Now;
-            ret.Directory = "OMSI 2";
+            ret.Directory = CommonRoot(files).Replace(Properties.Settings.Default.OmsiPath, "");
+            if (!String.IsNullOrEmpty(ret.Directory))
+                ret.Directory = ret.Directory.Remove(0, 1); // remove leading backslash
 
-            var targetPath = Properties.Settings.Default.OmsiPath;
+            var targetPath = Path.Combine(Properties.Settings.Default.OmsiPath, ret.Directory);
             foreach (var file in files)
             {
                 FileInfo fi = new FileInfo(file);
@@ -143,6 +145,49 @@ namespace OmsiTools.Backup
             }
             return ret;
         }
+
+        /// <summary>
+        /// Finds the common root of file names
+        /// </summary>
+        /// <param name="files">Array of file names</param>
+        /// <returns>Common root</returns>
+        private static string CommonRoot(ICollection<string> files)
+        {
+            var splittedFileNames = new List<string[]>(files.Count);
+            splittedFileNames.AddRange(files.Select(fn => fn.Split(Path.DirectorySeparatorChar)));
+            int minSplitLength = splittedFileNames[0].Length - 1;
+            if (files.Count > 1)
+            {
+                for (int i = 1; i < files.Count; i++)
+                {
+                    if (minSplitLength > splittedFileNames[i].Length)
+                    {
+                        minSplitLength = splittedFileNames[i].Length;
+                    }
+                }
+            }
+            string res = "";
+            for (int i = 0; i < minSplitLength; i++)
+            {
+                bool common = true;
+                for (int j = 1; j < files.Count; j++)
+                {
+                    if (!(common &= splittedFileNames[j - 1][i] == splittedFileNames[j][i]))
+                    {
+                        break;
+                    }
+                }
+                if (common)
+                {
+                    res += splittedFileNames[0][i] + Path.DirectorySeparatorChar;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return res.Remove(res.Length-1, 1);
+        }
         #endregion
 
         #region Public Methods
@@ -161,21 +206,46 @@ namespace OmsiTools.Backup
                 files.Add(Path.Combine(tp, file));
             }
             finished = false;
-            Lzma.Compress(files, path, new EventHandler<SevenZip.ProgressEventArgs>(Compressing), null, new EventHandler<EventArgs>(CompressionFinished));
+            Lzma.Compress(files, path, new EventHandler<SevenZip.ProgressEventArgs>(Working), null, new EventHandler<EventArgs>(Finished));
             while (!finished)
             {
-                
+                // twiddle thumbs
             }
         }
 
-        private void Compressing(object sender, SevenZip.ProgressEventArgs args)
+        private void Working(object sender, SevenZip.ProgressEventArgs args)
         {
             Progress = args.PercentDone;
         }
 
-        private void CompressionFinished(object sender, EventArgs args)
+        private void Finished(object sender, EventArgs args)
         {
             finished = true;
+        }
+
+        /// <summary>
+        /// Restores the backup to it's original place inside the OMSI 2 directory
+        /// </summary>
+        public void Restore()
+        {
+            string extractionDir;
+            if (Directory != "OMSI 2")
+                extractionDir = Path.Combine(Properties.Settings.Default.OmsiPath, Directory);
+            else
+                extractionDir = Properties.Settings.Default.OmsiPath;
+
+            finished = false;
+            Lzma.Extract(Path.Combine(Properties.Settings.Default.BackupLocation, Properties.Settings.Default.BackupDataDir, ArchiveID + ".backup"), extractionDir, new EventHandler<SevenZip.ProgressEventArgs>(Working), new EventHandler<SevenZip.FileOverwriteEventArgs>(Overwrite), null, new EventHandler<EventArgs>(Finished));
+            while (!finished)
+            {
+                // Twiddle thumbs
+            }
+        }
+
+        private void Overwrite(object sender, SevenZip.FileOverwriteEventArgs args)
+        {
+            args.Cancel = false;
+            Console.WriteLine("Overwriting existing file: " + args.FileName);
         }
 
         /// <summary>
@@ -193,7 +263,7 @@ namespace OmsiTools.Backup
             XElement loop = new XElement("Files");
             foreach (var file in Files)
             {
-                loop.Add(new XElement("Files", file));
+                loop.Add(new XElement("File", file));
             }
             s.Add(loop);
             s.Save(Path.Combine(Path.Combine(Properties.Settings.Default.BackupLocation, Properties.Settings.Default.BackupInfoDir), ArchiveID + ".xml"));

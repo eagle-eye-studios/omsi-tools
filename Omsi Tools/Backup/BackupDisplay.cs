@@ -34,7 +34,7 @@ namespace OmsiTools.Backup
     /// <summary>
     /// Struct for table display (so not all values are displayed to the user)
     /// </summary>
-    internal struct BackupDisplay
+    internal class BackupDisplay
     {
         /// <summary>
         /// The date the backup was created on

@@ -44,8 +44,21 @@ namespace OmsiTools
 
         private void BtnHofDistributorClick(object sender, EventArgs e)
         {
-            var dlg = new dist.Distributor();
-            dlg.ShowDialog(this);
+            try
+            {
+                var dlg = new dist.Distributor();
+                dlg.ShowDialog(this);
+            }
+            catch (Exception ex)
+            {
+
+#if DEBUG || TRACE
+                throw ex;
+#else
+                Console.Write(ex);
+                MessageBox.Show("An error occured: " + ex.Message + "\n" + ex.StackTrace, "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#endif
+            }
         }
 
         private void BtnQuitClick(object sender, EventArgs e)
@@ -78,14 +91,39 @@ namespace OmsiTools
 
         private void BtnBackupClick(object sender, EventArgs e)
         {
-            var dlg = new Backup.BackupTool();
-            dlg.ShowDialog();
+            try 
+            {
+                var dlg = new Backup.BackupTool();
+                dlg.ShowDialog();
+            }
+            catch(Exception ex)
+            {
+#if DEBUG || TRACE
+                throw ex;
+#else
+                Console.Write(ex);
+                MessageBox.Show("An error occured: " + ex.Message + "\n" + ex.StackTrace, "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#endif
+            }
         }
 
         private void BtnAddonManagerClick(object sender, EventArgs e)
         {
-            var dlg = new Addons.AddonManager();
-            dlg.ShowDialog();
+            try 
+            {
+                var dlg = new Addons.AddonManager();
+                dlg.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+
+#if DEBUG || TRACE
+                throw ex;
+#else
+                Console.Write(ex);
+                MessageBox.Show("An error occured: " + ex.Message + "\n" + ex.StackTrace, "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#endif
+            }
         }
     }
 }
