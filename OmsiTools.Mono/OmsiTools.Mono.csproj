@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net48</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>10</LangVersion>
+        <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.CSharp">
+        <HintPath>..\..\..\.nuget\packages\microsoft.netframework.referenceassemblies.net48\1.0.3\build\.NETFramework\v4.8\Microsoft.CSharp.dll</HintPath>
+      </Reference>
+      <Reference Include="System.Data.DataSetExtensions">
+        <HintPath>..\..\..\.nuget\packages\microsoft.netframework.referenceassemblies.net48\1.0.3\build\.NETFramework\v4.8\System.Data.DataSetExtensions.dll</HintPath>
+      </Reference>
+      <Reference Include="System.Windows.Forms">
+        <HintPath>..\..\..\.nuget\packages\microsoft.netframework.referenceassemblies.net48\1.0.3\build\.NETFramework\v4.8\System.Windows.Forms.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="MainWindow.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Backup\BackupTool.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Backup\NewBackup.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Backup\RestoreDialog.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="InfoDialog.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="AboutBox.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Distributor\Distributor.cs">
+        <SubType>Form</SubType>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\OmsiTools.Common\OmsiTools.Common.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Backups\BackupTool.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>BackupTool.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Backups\NewBackup.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>NewBackup.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Backups\RestoreDialog.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>RestoreDialog.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.Resources.Extensions" Version="9.0.0-rc.2.24473.5" />
+    </ItemGroup>
+
+</Project>

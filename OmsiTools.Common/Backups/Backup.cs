@@ -25,13 +25,9 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *	THE SOFTWARE.
  */
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Xml.Linq;
 
-namespace OmsiTools.Backup
+namespace OmsiTools.Common.Backups
 {
     /// <summary>
     /// Class representing a backup.

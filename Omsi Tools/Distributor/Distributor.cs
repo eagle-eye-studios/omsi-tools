@@ -32,6 +32,7 @@ using System.Media;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OmsiTools.Common.Distributor;
 
 namespace OmsiTools.Distributor
 {

@@ -10,9 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OmsiTools</RootNamespace>
     <AssemblyName>OmsiToolbox</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>veröffentlichen\</PublishUrl>
     <Install>true</Install>
@@ -32,6 +32,9 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <LangVersion>10</LangVersion>
+    <Nullable>enable</Nullable>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
@@ -138,14 +141,6 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Addons\AddonManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Addons\AddonManager.Designer.cs">
-      <DependentUpon>AddonManager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Backup\Backup.cs" />
-    <Compile Include="Backup\BackupDisplay.cs" />
     <Compile Include="Backup\BackupTool.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,7 +159,6 @@
     <Compile Include="Backup\RestoreDlg.Designer.cs">
       <DependentUpon>RestoreDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Distributor\BusEntry.cs" />
     <Compile Include="Distributor\Distributor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,9 +182,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Addons\AddonManager.resx">
-      <DependentUpon>AddonManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Backup\BackupTool.resx">
       <DependentUpon>BackupTool.cs</DependentUpon>
@@ -221,15 +212,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Omsi Tools.licenseheader" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -267,6 +249,15 @@
       <Link>7z64.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Addons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OmsiTools.Common\OmsiTools.Common.csproj">
+      <Project>{bd7d4be7-dc11-4d9a-8d4c-3479c84d6510}</Project>
+      <Name>OmsiTools.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

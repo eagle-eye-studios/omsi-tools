@@ -1,10 +1,10 @@
-﻿/*  This file is part of the "OMSI Tools" project. 
+﻿/*  This file is part of the "OMSI Tools" project.
  *
- *  Authors: Florian Vick <florian@eagle-eye-studios.net> 
+ *  Authors: Florian Vick <florian@eagle-eye-studios.net>
  *  Find the project at https://github.com/vickfl/omsi-tools/
  *
  *  OMSI Tools is licensed under the MIT License:
- * 
+ *
  *	Copyright (c) 2014 Eagle Eye Studios, Florian Vick
  *
  *	Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,13 +25,10 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *	THE SOFTWARE.
  */
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+
 using SevenZip;
 
-namespace OmsiTools
+namespace OmsiTools.Common
 {
     /// <summary>
     /// Helper class for easier use of the SevenZipSharp library.
@@ -99,29 +96,19 @@ namespace OmsiTools
         /// </summary>
         /// <param name="inputFile">The archive to extract (full path, please!)</param>
         /// <param name="outputDir">The path to extract the archive to (also full path, please!)</param>
-        public static void Extract(string inputFile, string outputDir)
-        {
-            Extract(inputFile, outputDir, null, null, null, null);
-        }
-
-        /// <summary>
-        /// Extracts a 7zip archive to the specified output directory.
-        /// </summary>
-        /// <param name="inputFile">The archive to extract (full path, please!)</param>
-        /// <param name="outputDir">The path to extract the archive to (also full path, please!)</param>
         /// <param name="extractingHandler">Function to call when the extraction state changes. (Hint: Update your progress bar here!)</param>
         /// <param name="fileExistsHandler">Function to call when a file exists</param>
         /// <param name="fileExtractionStartedHandler">Function is called when a new file is being extracted (Hint: Update your status text here!)</param>
         /// <param name="finishedHandler">Function that is called when the extraction process is finished</param>
-        public static void Extract(string inputFile, string outputDir, EventHandler<ProgressEventArgs> extractingHandler, EventHandler<FileOverwriteEventArgs> fileExistsHandler, 
-            EventHandler<FileInfoEventArgs> fileExtractionStartedHandler, EventHandler<EventArgs> finishedHandler)
+        public static void Extract(string inputFile, string outputDir, EventHandler<ProgressEventArgs> extractingHandler = null, EventHandler<FileOverwriteEventArgs> fileExistsHandler = null, 
+            EventHandler<FileInfoEventArgs> fileExtractionStartedHandler = null, EventHandler<EventArgs> finishedHandler = null)
         {
             if (Environment.Is64BitProcess)
-                SevenZip.SevenZipExtractor.SetLibraryPath(Path.GetFullPath("7z64.dll"));
+                SevenZipExtractor.SetLibraryPath(Path.GetFullPath("7z64.dll"));
             else
-                SevenZip.SevenZipExtractor.SetLibraryPath(Path.GetFullPath("7z.dll"));
+                SevenZipExtractor.SetLibraryPath(Path.GetFullPath("7z.dll"));
 
-            SevenZip.SevenZipExtractor e = new SevenZip.SevenZipExtractor(inputFile);
+            SevenZipExtractor e = new SevenZipExtractor(inputFile);
             e.PreserveDirectoryStructure = true;
 
             if (extractingHandler != null)

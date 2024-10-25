@@ -5,7 +5,7 @@ namespace OmsiTools.Backup
 {
     public partial class RestoreDlg : Telerik.WinControls.UI.RadForm
     {
-        public RestoreDlg(Backup backup)
+        public RestoreDlg(Common.Backups.Backup backup)
         {
             InitializeComponent();
             treeView.Nodes.Clear();

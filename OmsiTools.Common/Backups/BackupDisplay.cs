@@ -1,4 +1,5 @@
 ﻿/*  This file is part of the "OMSI Tools" project. 
+ *
  *  Authors: Florian Vick <florian@eagle-eye-studios.net> 
  *  Find the project at https://github.com/vickfl/omsi-tools/
  *
@@ -24,22 +25,25 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *	THE SOFTWARE.
  */
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using Telerik.WinControls;
 
-namespace OmsiTools.Addons
+namespace OmsiTools.Common.Backups
 {
-    public partial class AddonManager : Telerik.WinControls.UI.RadForm
+    /// <summary>
+    /// Struct for table display (so not all values are displayed to the user)
+    /// </summary>
+    public class BackupDisplay
     {
-        public AddonManager()
-        {
-            InitializeComponent();
-        }
+        /// <summary>
+        /// The date the backup was created on
+        /// </summary>
+        public DateTime Timestamp { get; set; }
+        /// <summary>
+        /// The folder this backup was created for
+        /// </summary>
+        public string Folder { get; set; }
+        /// <summary>
+        /// The size of the backup
+        /// </summary>
+        public string Size { get; set; }
     }
 }

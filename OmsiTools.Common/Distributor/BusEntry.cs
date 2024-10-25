@@ -25,15 +25,13 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *	THE SOFTWARE.
  */
-using System;
-using System.Linq;
 
-namespace OmsiTools.Distributor
+namespace OmsiTools.Common.Distributor
 {
     public class BusEntry
     {
-        public string Name { get; internal set; }
-        public string Path { get; internal set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
 
         public override string ToString()
         {

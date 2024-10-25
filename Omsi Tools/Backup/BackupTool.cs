@@ -30,15 +30,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using OmsiTools.Common.Backups;
 
 namespace OmsiTools.Backup
 {
     public partial class BackupTool : Telerik.WinControls.UI.RadForm
     {
         #region Fields
-        private volatile List<Backup> backups;
+        private volatile List<Common.Backups.Backup> backups;
         private volatile List<BackupDisplay> backupsForDisplay;
-        private volatile Backup currentBackup;
+        private volatile Common.Backups.Backup currentBackup;
         private bool uiDisabled = false;
         #endregion
 
