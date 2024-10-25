@@ -44,6 +44,8 @@ namespace OmsiTools.Win.Distributor
         {
             this.InitializeComponent();
             userBusFiles = new List<BusEntry>();
+            // set default path on file selector
+            this.fileSelector.Value = Path.Combine(Properties.Settings.Default.OmsiPath, "Vehicles\\");
         }
 
         /// <summary>
@@ -97,6 +99,9 @@ namespace OmsiTools.Win.Distributor
         {
             foreach (var be in this.userBusFiles)
             {
+                if (be == null)
+                    continue;
+
                 if (be.Name.Equals(name))
                 {
                     return be;
