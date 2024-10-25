@@ -1,7 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
-namespace OmsiTools.Backup
+namespace OmsiTools.Win.Backups
 {
     public partial class RestoreDlg : Telerik.WinControls.UI.RadForm
     {

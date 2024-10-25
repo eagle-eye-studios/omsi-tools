@@ -1,4 +1,4 @@
-﻿namespace OmsiTools.Backup
+﻿namespace OmsiTools.Win.Backups
 {
     partial class NewBackup
     {

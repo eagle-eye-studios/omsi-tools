@@ -28,9 +28,9 @@
 using System;
 using System.Windows.Forms;
 using Microsoft.Win32;
-using dist = OmsiTools.Distributor;
+using dist = OmsiTools.Win.Distributor;
 
-namespace OmsiTools
+namespace OmsiTools.Win
 {
     public partial class MainWindow : Telerik.WinControls.UI.RadForm
     {
@@ -38,7 +38,11 @@ namespace OmsiTools
         public MainWindow()
         {
             InitializeComponent();
-            Properties.Settings.Default.OmsiPath = GetOmsiPath();
+            if (Properties.Settings.Default.OmsiPath == "")
+            {
+                Properties.Settings.Default.OmsiPath = GetOmsiPath();
+                Properties.Settings.Default.Save();
+            }
             textBoxOmsiPath.Text = Properties.Settings.Default.OmsiPath;
         }
 
@@ -84,7 +88,15 @@ namespace OmsiTools
             catch (Exception ex)
             {
                 MessageBox.Show("Is OMSI 2 installed and recognized in the aerosoft Launcher?\nException Details:\n" + ex.StackTrace, "Error accessing the Windows Registry: Path Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
+                FolderBrowserDialog dlg = new FolderBrowserDialog
+                {
+                    Description = "Please select the OMSI 2 directory manually."
+                };
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                    return dlg.SelectedPath;
+                else
+                    Application.Exit();
             }
             return "";
         }
@@ -93,7 +105,7 @@ namespace OmsiTools
         {
             try 
             {
-                var dlg = new Backup.BackupTool();
+                var dlg = new Backups.BackupTool();
                 dlg.ShowDialog();
             }
             catch(Exception ex)
@@ -109,21 +121,6 @@ namespace OmsiTools
 
         private void BtnAddonManagerClick(object sender, EventArgs e)
         {
-            try 
-            {
-                var dlg = new Addons.AddonManager();
-                dlg.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-
-#if DEBUG || TRACE
-                throw ex;
-#else
-                Console.Write(ex);
-                MessageBox.Show("An error occured: " + ex.Message + "\n" + ex.StackTrace, "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-#endif
-            }
         }
     }
 }

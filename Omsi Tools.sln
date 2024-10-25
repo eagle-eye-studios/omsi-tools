@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omsi Tools", "Omsi Tools\Omsi Tools.csproj", "{4C0194FA-8371-48F1-94C5-39F4775FC9D3}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmsiTools.Win", "Omsi Tools\OmsiTools.Win.csproj", "{4C0194FA-8371-48F1-94C5-39F4775FC9D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmsiTools.Mono", "OmsiTools.Mono\OmsiTools.Mono.csproj", "{78585F3A-9EF0-4DEF-8E57-DEE6E1CC2FC6}"
 EndProject
@@ -78,5 +80,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3D716DCD-C871-4204-ACB6-B48880BC49B6}
 	EndGlobalSection
 EndGlobal

@@ -4,7 +4,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.IO;
 
-namespace OmsiTools.Backup
+namespace OmsiTools.Win.Backups
 {
     public partial class NewBackup : Telerik.WinControls.UI.RadForm
     {

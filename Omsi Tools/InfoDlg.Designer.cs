@@ -1,4 +1,4 @@
-﻿namespace OmsiTools
+﻿namespace OmsiTools.Win
 {
     partial class InfoDlg
     {

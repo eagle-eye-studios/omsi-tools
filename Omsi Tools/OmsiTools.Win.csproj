@@ -8,12 +8,16 @@
     <ProjectGuid>{4C0194FA-8371-48F1-94C5-39F4775FC9D3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OmsiTools</RootNamespace>
+    <RootNamespace>OmsiTools.Win</RootNamespace>
     <AssemblyName>OmsiToolbox</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <LangVersion>10</LangVersion>
+    <Nullable>enable</Nullable>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <PublishUrl>veröffentlichen\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -32,9 +36,6 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <LangVersion>10</LangVersion>
-    <Nullable>enable</Nullable>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
@@ -47,6 +48,8 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>
@@ -104,12 +107,11 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SevenZipSharp, Version=0.64.5323.21757, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dependencies\SevenZipSharp\SevenZipSharp.dll</HintPath>
+    <Reference Include="SevenZipSharp, Version=1.6.2.24, Culture=neutral, PublicKeyToken=c8ff6ba0184838bb, processorArchitecture=MSIL">
+      <HintPath>..\packages\Squid-Box.SevenZipSharp.1.6.2.24\lib\net472\SevenZipSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -141,22 +143,22 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Backup\BackupTool.cs">
+    <Compile Include="Backups\BackupTool.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Backup\BackupTool.Designer.cs">
+    <Compile Include="Backups\BackupTool.Designer.cs">
       <DependentUpon>BackupTool.cs</DependentUpon>
     </Compile>
-    <Compile Include="Backup\NewBackup.cs">
+    <Compile Include="Backups\NewBackup.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Backup\NewBackup.Designer.cs">
+    <Compile Include="Backups\NewBackup.Designer.cs">
       <DependentUpon>NewBackup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Backup\RestoreDlg.cs">
+    <Compile Include="Backups\RestoreDlg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Backup\RestoreDlg.Designer.cs">
+    <Compile Include="Backups\RestoreDlg.Designer.cs">
       <DependentUpon>RestoreDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="Distributor\Distributor.cs">
@@ -171,7 +173,6 @@
     <Compile Include="InfoDlg.Designer.cs">
       <DependentUpon>InfoDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="Lzma.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,13 +184,13 @@
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Backup\BackupTool.resx">
+    <EmbeddedResource Include="Backups\BackupTool.resx">
       <DependentUpon>BackupTool.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Backup\NewBackup.resx">
+    <EmbeddedResource Include="Backups\NewBackup.resx">
       <DependentUpon>NewBackup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Backup\RestoreDlg.resx">
+    <EmbeddedResource Include="Backups\RestoreDlg.resx">
       <DependentUpon>RestoreDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Distributor\Distributor.resx">
@@ -201,17 +202,8 @@
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Omsi Tools.licenseheader" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -239,16 +231,6 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\dependencies\SevenZipSharp\7z.dll">
-      <Link>7z.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\dependencies\SevenZipSharp\7z64.dll">
-      <Link>7z64.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Addons\" />

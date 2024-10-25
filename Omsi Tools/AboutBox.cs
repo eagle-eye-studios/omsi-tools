@@ -27,7 +27,7 @@
 using System;
 using System.Reflection;
 
-namespace OmsiTools
+namespace OmsiTools.Win
 {
     partial class AboutBox : Telerik.WinControls.UI.RadForm
     {

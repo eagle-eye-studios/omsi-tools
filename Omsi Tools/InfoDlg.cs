@@ -28,7 +28,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace OmsiTools
+namespace OmsiTools.Win
 {
     public partial class InfoDlg : Telerik.WinControls.UI.RadForm
     {

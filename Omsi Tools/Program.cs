@@ -25,10 +25,9 @@
  *	THE SOFTWARE.
  */
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
-namespace OmsiTools
+namespace OmsiTools.Win
 {
     static class Program
     {

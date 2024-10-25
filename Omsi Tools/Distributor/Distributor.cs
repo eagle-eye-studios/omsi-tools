@@ -34,7 +34,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OmsiTools.Common.Distributor;
 
-namespace OmsiTools.Distributor
+namespace OmsiTools.Win.Distributor
 {
     public partial class Distributor : Telerik.WinControls.UI.RadForm
     {

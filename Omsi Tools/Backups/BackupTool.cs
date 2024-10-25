@@ -32,7 +32,7 @@ using System.Threading;
 using System.Windows.Forms;
 using OmsiTools.Common.Backups;
 
-namespace OmsiTools.Backup
+namespace OmsiTools.Win.Backups
 {
     public partial class BackupTool : Telerik.WinControls.UI.RadForm
     {

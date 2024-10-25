@@ -1,4 +1,4 @@
-﻿namespace OmsiTools.Distributor
+﻿namespace OmsiTools.Win.Distributor
 {
     partial class Distributor
     {
